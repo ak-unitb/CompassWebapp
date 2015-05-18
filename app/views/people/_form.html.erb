@@ -1,0 +1,60 @@
+<%= form_for(@person) do |f| %>
+  <% if @person.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@person.errors.count, "error") %> <%= t people.form.error_intro %>:</h2>
+
+      <ul>
+      <% @person.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :firstname, t( "people.firstname" ) %><br>
+    <%= f.text_field :firstname %>
+  </div>
+  <div class="field">
+    <%= f.label :middlename, t( "people.middlename" ) %><br>
+    <%= f.text_field :middlename %>
+  </div>
+  <div class="field">
+    <%= f.label :lastname, t( "people.lastname" ) %><br>
+    <%= f.text_field :lastname %>
+  </div>
+  <div class="field">
+    <%= f.label :title, t( "people.title" ) %><br>
+    <%= f.text_field :title, :list => 'titles' %>
+    <datalist id="titles">
+      <option value="">
+      <option value="Dr.">
+      <option value="Prof. Dr.">
+      <option value="Graf">
+      <option value="Herzog">
+    </datalist> 
+  </div>
+  <div class="field">
+    <%= f.label :sex, t( "people.sex" ) %><br>
+    <%= f.select  :sex, t( "people.sexes" ).invert, :selected => @person.sex %>
+  </div>
+  <div class="field">
+    <%= f.label :salutation, t( "people.salutation" ) %><br>
+    <%= f.text_field :salutation %>
+  </div>
+  <div class="field">
+    <%= f.label :password, t( "people.password" ) %><br>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :roles, t( "people.roles" ) %><br>
+    <%= f.number_field :roles %>
+  </div>
+  <div class="field">
+    <%= f.label :status, t( "people.status" ) %><br>
+    <%= f.number_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

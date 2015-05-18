@@ -1,0 +1,51 @@
+<h1><%= t( "people.title_show" )%></h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong><%= t( "people.firstname" ) %>:</strong>
+  <%= @person.firstname %>
+</p>
+
+<p>
+  <strong><%= t( "people.middlename" ) %>:</strong>
+  <%= @person.middlename %>
+</p>
+
+<p>
+  <strong><%= t( "people.lastname" ) %>:</strong>
+  <%= @person.lastname %>
+</p>
+
+<p>
+  <strong><%= t( "people.title" ) %>:</strong>
+  <%= @person.title %>
+</p>
+
+<p>
+  <strong><%= t( "people.sex" ) %>:</strong>
+  <%= t( "people.sexes.#{@person.sex}" ) %>
+</p>
+
+<p>
+  <strong><%= t( "people.salutation" ) %>:</strong>
+  <%= @person.salutation %>
+</p>
+
+<p>
+  <strong><%= t( "people.password" ) %>:</strong>
+  <%= @person.password %>
+</p>
+
+<p>
+  <strong><%= t( "people.roles" ) %>:</strong>
+  <%= @person.roles %>
+</p>
+
+<p>
+  <strong><%= t( "people.status" ) %>:</strong>
+  <%= @person.status %>
+</p>
+
+<%= link_to t( "forms.edit" ), edit_person_path(@person) %> |
+<%= link_to t( "forms.back" ), people_path %>
