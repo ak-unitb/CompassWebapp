@@ -18,6 +18,7 @@ gem 'mysql2'
 gem 'therubyracer', :platform=>:ruby
 gem 'unicorn'
 gem 'unicorn-rails'
+gem 'bcrypt-ruby', :require=>'bcrypt'
 group :development do
   gem 'better_errors'
   gem 'quiet_assets'
