@@ -1,7 +1,7 @@
 <%= form_for(@person) do |f| %>
   <% if @person.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@person.errors.count, "error") %> <%= t people.form.error_intro %>:</h2>
+      <h2><%= @person.errors.count %> <%= t( "error", count: @person.errors.count ) %> <%= t( "people.form.error_intro", count: @person.errors.count ) %></h2>
 
       <ul>
       <% @person.errors.full_messages.each do |message| %>
@@ -48,11 +48,19 @@
   </div>
   <div class="field">
     <%= f.label :roles, t( "people.roles" ) %><br>
-    <%= f.number_field :roles %>
+    <% i = 0 %>
+    <% for role in Person.values_for_roles do %>
+      <%= check_box_tag "person[roles][]", role, @person.roles.include?(role), {:id => "person_roles_" + (i+=1).to_s } %>
+      <%= f.label "roles_" + i.to_s, role.to_s.titleize %>
+    <% end %>
   </div>
   <div class="field">
     <%= f.label :status, t( "people.status" ) %><br>
-    <%= f.number_field :status %>
+    <% i = 0 %>
+    <% for status in Person.values_for_status do %>
+      <%= check_box_tag "person[status][]", status, @person.status.include?(status), {:id => "person_status_" + (i+=1).to_s } %>
+      <%= f.label "status_" + i.to_s, status.to_s.titleize %>
+    <% end %>
   </div>
   <div class="actions">
     <%= f.submit %>

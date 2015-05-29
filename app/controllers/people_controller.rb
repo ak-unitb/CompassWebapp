@@ -3,8 +3,14 @@ class PeopleController < ApplicationController
 
   # GET /people
   # GET /people.json
+  # GET /people.xml
   def index
-    @people = Person.all.each { |person|
+    @people = Person.all
+
+    @people = @people.with_status(*params[:status]) if params[:status].present?
+    @people = @people.with_roles(*params[:role]) if params[:role].present?
+
+    @people = @people.each { |person|
       person.password = "***************"
     }
     respond_to do |format|
@@ -16,6 +22,7 @@ class PeopleController < ApplicationController
 
   # GET /people/1
   # GET /people/1.json
+  # GET /people/1.xml
   def show
     @person.password = "***************"
     respond_to do |format|
@@ -37,7 +44,11 @@ class PeopleController < ApplicationController
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(person_params)
+    filtered_params = person_params
+    filtered_params[:roles] ||= [:leaser]
+    filtered_params[:status] ||= [:pending]
+
+    @person = Person.new(filtered_params)
 
     respond_to do |format|
       if @person.save
@@ -55,8 +66,12 @@ class PeopleController < ApplicationController
   # PATCH/PUT /people/1
   # PATCH/PUT /people/1.json
   def update
+    filtered_params = person_params
+    filtered_params[:roles] ||= []
+    filtered_params[:status] ||= []
+
     respond_to do |format|
-      if @person.update(person_params)
+      if @person.update(filtered_params)
         format.html { redirect_to @person, notice: 'Person was successfully updated.' }
         format.json { render :show, status: :ok, location: @person }
         format.xml { render :show, status: :created, location: @person }
@@ -87,6 +102,22 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:firstname, :middlename, :lastname, :title, :sex, :salutation, :password, :roles, :status)
+      #puts params
+      params.require(:person).permit(
+        :firstname,
+        :middlename,
+        :lastname,
+        :title,
+        :sex,
+        :salutation,
+        :username,
+        :email,
+        :password,
+        :password_confirmation,
+        :roles => [],
+        :status => []
+      )
+      #puts params
+      #params
     end
 end

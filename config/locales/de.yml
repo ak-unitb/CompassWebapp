@@ -20,19 +20,33 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 de:
+  error:
+    one: Fehler
+    other: Fehler
   forms:
     show: Anzeigen
     edit: Bearbeiten
     destroy: Löschen
     back: Zurück
     are_you_sure: Sind Sie sicher
+    actions:
+      one: Aktion
+      other: Aktionen
+  filter_forms:
+    found_entities:
+      zero: Keinen Datensatz gefunden
+      one: Einen Datensatz gefunden
+      other: "%{count} Datensätze gefunden"
   helpers:
     submit:
       create: "%{model} anlegen"
       update: "%{model} speichern"
   hello: "Hallo Welt"
   people:
-    title_index: Liste alles Personen
+    people:
+      one: Person
+      other: Personen
+    title_index: Liste aller Personen
     title_new: Person anlegen
     title_show: Person
     title_edit: Person bearbeiten
@@ -49,7 +63,22 @@ de:
     roles: Rollen
     status: Status
     form:
-      error_intro: verhinderte das diese Person gespeichert werden konnte
+      error_intro:
+        one: verhinderte, dass diese Person gespeichert werden konnte
+        other: verhinderten, dass diese Person gespeichert werden konnte
       new_person: Neue Person anlegen
+
+  activerecord:
+    errors:
+      models:
+        person:
+          attributes:
+            email:
+              blank: Keine eMail-Adresse angegeben
+              taken: eMail-Adresse bereits vergeben
+            username:
+              blank: Keinen Nutzernamen angegeben
+              taken: Nutzername bereits vergeben
+
 
 

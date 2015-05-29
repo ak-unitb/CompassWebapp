@@ -1,43 +1,72 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing People</h1>
+<h1><%= t "people.title_index" %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th><%= t "people.firstname" %></th>
-      <th><%= t "people.middlename" %></th>
-      <th><%= t "people.lastname" %></th>
-      <th><%= t "people.title" %></th>
-      <th><%= t "people.sex" %></th>
-      <th><%= t "people.salutation" %></th>
-      <th><%= t "people.password" %></th>
-      <th><%= t "people.roles" %></th>
-      <th><%= t "people.status" %></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="filter-form">
+  <%= form_for(:person, :url => { :action => "index" }, :html => {:method => :get, :class => "form-filter collapsable"} ) do |f| %>
+    <legend>Filter-Form</legend>
+	  <div class="form-filter collapsable body">
+      <%= f.label :roles, t( "people.roles" ) %><br>
+      <% i = 0 %>
+      <% for role in Person.values_for_roles do %>
+        <%= check_box_tag "role[]", role, ( params['role'].include?(role.to_s) if params["role"].present? ), {:id => "person_role_" + (i+=1).to_s } %>
+        <%= f.label "role_" + i.to_s, role.to_s.titleize %>
+      <% end %>
+      <br>
+      <%= f.label :status, t( "people.status" ) %><br>
+      <% i = 0 %>
+      <% for status in Person.values_for_status do %>
+        <%= check_box_tag "status[]", status, ( params['status'].include?(status.to_s) if params['status'].present? ), {:id => "person_status_" + (i+=1).to_s } %>
+        <%= f.label "status_" + i.to_s, status.to_s.titleize %>
+      <% end %>
+      <%= f.submit "Filter" %>
+    </div>
+  <% end%>
+</div>
 
-  <tbody>
-    <% @people.each do |person| %>
+<h3>
+  <%= t( "filter_forms.found_entities", count: @people.length ) %>
+</h3>
+
+<div class="table-responsive">
+  <table class="rwd-table">
+    <thead>
       <tr>
-        <td><%= person.firstname %></td>
-        <td><%= person.middlename %></td>
-        <td><%= person.lastname %></td>
-        <td><%= person.title %></td>
-        <td><%= t "people.sexes.#{person.sex}"  %></td>
-        <td><%= person.salutation %></td>
-        <td><%= person.password %></td>
-        <td><%= person.roles %></td>
-        <td><%= person.status %></td>
-        <td><%= link_to t( "forms.show" ), person %></td>
-        <td><%= link_to t( "forms.edit" ), edit_person_path(person) %></td>
-        <td><%= link_to t( "forms.destroy" ), person, method: :delete, data: { confirm: t( "forms.are_you_sure" ).concat("?") } %></td>
+        <th>ID</th>
+        <th><%= t "people.firstname" %></th>
+        <th><%= t "people.middlename" %></th>
+        <th><%= t "people.lastname" %></th>
+        <th><%= t "people.title" %></th>
+        <th><%= t "people.sex" %></th>
+        <th><%= t "people.salutation" %></th>
+        <th><%= t "people.password" %></th>
+        <th><%= t "people.roles" %></th>
+        <th><%= t "people.status" %></th>
+        <th colspan="3"><%= t( "forms.actions", count: 3 ) %></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-
+    </thead>
+  
+    <tbody>
+      <% @people.each do |person| %>
+        <tr>
+          <td data-th="ID"><%= person.id %></td>
+          <td data-th="<%= t "people.firstname" %>"><%= person.firstname %></td>
+          <td data-th="<%= t "people.middlename" %>"><%= person.middlename %></td>
+          <td data-th="<%= t "people.lastname" %>"><%= person.lastname %></td>
+          <td data-th="<%= t "people.title" %>"><%= person.title %></td>
+          <td data-th="<%= t "people.sex" %>"><%= t "people.sexes.#{person.sex}"  %></td>
+          <td data-th="<%= t "people.salutation" %>"><%= person.salutation %></td>
+          <td data-th="<%= t "people.password" %>"><%= person.password %></td>
+          <td data-th="<%= t "people.roles" %>"><%= person.roles.map { |r| r.to_s.titleize }.join(", ") %></td>
+          <td data-th="<%= t "people.status" %>"><%= person.status.map { |s| s.to_s.titleize }.join(", ") %></td>
+          <td data-th="<%= t( "forms.actions", count: 1 ) %>"><%= link_to t( "forms.show" ), person %></td>
+          <td data-th="<%= t( "forms.actions", count: 1 ) %>"><%= link_to t( "forms.edit" ), edit_person_path(person) %></td>
+          <td data-th="<%= t( "forms.actions", count: 1 ) %>"><%= link_to t( "forms.destroy" ), person, method: :delete, data: { confirm: t( "forms.are_you_sure" ).concat("?") } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <br>
 
 <%= link_to t( "people.form.new_person"), new_person_path %>

@@ -13,3 +13,26 @@
  *= require_tree .
  *= require_self
  */
+
+
+.form-filter {
+  &.collapsable {
+  }
+  .body {
+    border: 1px solid black;
+    display: none;
+    padding: 0 1em;
+  }
+  legend {
+    background-color: rgba(204, 204, 204, .7);
+    display: block;
+    margin: 0;
+    padding: .25em;
+  }
+}
+
+.translation_missing {
+  background-color: red;
+  border: 2px solid violet;
+  color: yellow;
+}

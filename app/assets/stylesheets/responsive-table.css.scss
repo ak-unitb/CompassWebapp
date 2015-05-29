@@ -1,0 +1,104 @@
+/**
+ * inspired by
+ *    http://codepen.io/geoffyuen/pen/FCBEg:
+ *  slightly modified
+ * 
+ * using mobile first method (IE8,7 requires respond.js polyfill
+ * https://github.com/scottjehl/Respond)
+ * 
+ */
+
+
+$breakpoint-alpha: 767px;
+
+.rwd-table {
+  margin: 1em 0;
+  min-width: 280px;
+  width: 100%;
+  
+  tr {
+    @media (min-width: $breakpoint-alpha) {
+      border-top: 0.25em solid transparent;
+      border-bottom: 0.25em solid transparent;
+    }
+    border-top: 1em solid transparent;
+    border-bottom: 1em solid transparent;
+  }
+  
+  th {
+    display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!   
+  }
+  
+  td {
+    display: block; 
+    
+    &:first-child {
+      padding-top: .5em;
+    }
+    &:last-child {
+      padding-bottom: .5em;
+    }
+
+    &:before {
+      content: attr(data-th)": ";
+      font-weight: bold;
+
+      // optional stuff to make it look nicer
+      width: 8.5em;
+      display: inline-block;
+      text-align: right;
+      padding-right: 1em;
+      // optional stuff
+      
+      @media (min-width: $breakpoint-alpha) {
+        display: none;
+      }
+    }
+  }
+  
+  th, td {
+    text-align: left;
+    
+    @media (min-width: $breakpoint-alpha) {
+      display: table-cell;
+      padding: .25em .5em;
+      
+      &:first-child {
+        padding-left: 0;
+      }
+      
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+
+  }
+  
+  
+}
+
+
+// presentational styling
+
+.rwd-table {
+  background: lightgray;
+  color: inherit;
+  overflow: hidden;
+	border-color: transparent;
+  tr {
+    border-color: #eee; /* transparent lighten(#34495E, 10%);*/
+  }
+  th, td {
+    margin: .5em .2em;
+    border-color: #eee;
+    padding: .25m;
+    @media (min-width: $breakpoint-alpha) { 
+      padding: 1em !important; 
+    }
+  }
+  th, td:before {
+    color: inherit;
+  }
+}
+
+// ### \http://codepen.io/geoffyuen/pen/FCBEg

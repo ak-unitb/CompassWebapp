@@ -19,6 +19,7 @@ gem 'therubyracer', :platform=>:ruby
 gem 'unicorn'
 gem 'unicorn-rails'
 gem 'bcrypt-ruby', :require=>'bcrypt'
+gem 'bitmask_attributes'
 group :development do
   gem 'better_errors'
   gem 'quiet_assets'

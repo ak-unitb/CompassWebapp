@@ -20,18 +20,32 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  error:
+    one: error
+    other: errors
   forms:
     show: Show
     edit: Edit
     destroy: Destroy
     back: Back
     are_you_sure: Are you sure
+    actions:
+      one: action
+      other: actions
+  filter_forms:
+    found_entities:
+      zero: no entity found
+      one: Found %{count} entity
+      other: Found %{count} entities
   helpers:
     submit:
       create: "Create %{model}"
       update: "Save %{model}"
   hello: "Hello world"
   people:
+    people:
+      one: person
+      other: people
     title_index: Peoples Listing
     title_new: Create Person
     title_show: Person
@@ -49,7 +63,21 @@ en:
     roles: roles
     status: Status
     form:
-      error_intro: prohibited this person from being saved
+      error_intro:
+        one: prohibited this person from being saved
+        other: prohibited this person from being saved
       new_person: Create new Person
+
+  activerecord:
+    errors:
+      models:
+        person:
+          attributes:
+            email:
+              blank: No eMail-Adress given
+              taken: eMail-Adress already in use
+            username:
+              blank: no username given
+              taken: username already in use
 
 

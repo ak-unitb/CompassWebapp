@@ -15,3 +15,12 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(function(){
+	$(".form-filter.collapsable").find("legend").on(
+	  "click",
+	  function () {
+	    $(this).blur().parent().children(".body").toggle(200);
+	  }
+	);
+});
